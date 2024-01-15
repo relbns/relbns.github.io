@@ -54,3 +54,13 @@ This work is published under [MIT][mit] License.
 [use-template]: https://github.com/cotes2020/chirpy-starter/generate
 [CD]: https://en.wikipedia.org/wiki/Continuous_deployment
 [mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+
+
+install by:
+/opt/homebrew/Cellar/ruby/3.3.0/bin/ruby -S bundle install
+
+run by:
+/opt/homebrew/Cellar/ruby/3.3.0/bin/ruby -S bundle exec jekyll s
+
+for hebrew posts add this:
+`<style>.content{direction: rtl; } .me-2{margin-right: 0 !important;}</style>`
