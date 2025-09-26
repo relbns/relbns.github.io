@@ -1,0 +1,189 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import PageHeader from '../components/PageHeader.astro';
+import TutorialPostCard from '../components/TutorialPostCard.astro';
+import { getDifficultyColor, formatDate } from '../utils';
+import { extractUniqueTags } from '../utils/searchUtils';
+
+const allPosts = await getCollection('tutorials');
+const sortedPosts = allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+
+const categories = ["הכל", ...new Set(allPosts.map(post => post.data.category))];
+const difficulties = ["הכל", "מתחיל", "בינוני", "מתקדם"];
+const allTags = extractUniqueTags(allPosts);
+---
+
+<Layout title="Portfolio - Tutorials" description="מדריכים מקצועיים ומעמיקים בתחום הפיתוח">
+  <div class="min-h-screen bg-background" dir="rtl">
+    <Navigation />
+    <main class="py-20">
+      <div class="container max-w-7xl mx-auto px-4">
+        <PageHeader 
+          title="מדריכים ולמידה"
+          description="מדריכים מקצועיים ומעמיקים בתחום הפיתוח. כל מדריך כולל קוד לדוגמה, הסברים מפורטים ושיטות עבודה מומלצות."
+        />
+
+        <!-- Search and Filter -->
+        <div class="flex flex-col md:flex-row gap-4 mb-12">
+          <div class="relative flex-grow">
+            <input type="search" id="search-input" placeholder="חיפוש מדריכים..." class="w-full px-4 py-2 pl-10 rounded-lg border bg-background" />
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="h-5 w-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2">
+            {categories.map((category) => (
+              <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 category-filter" data-category={category}>
+                {category}
+              </button>
+            ))}
+          </div>
+          <div class="flex flex-wrap justify-center gap-2">
+            {difficulties.map((difficulty) => (
+              <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 difficulty-filter" data-difficulty={difficulty}>
+                {difficulty}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Tutorials Grid -->
+        <div id="tutorials-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sortedPosts.map((post) => (
+            <div class="tutorial-post-wrapper" 
+                 data-title={post.data.title} 
+                 data-category={post.data.category} 
+                 data-difficulty={post.data.difficulty} 
+                 data-description={post.data.description || ''} 
+                 data-tags={post.data.tags.join(',')}>
+              <TutorialPostCard post={post} />
+            </div>
+          ))}
+        </div>
+        <div id="no-results-message" class="text-center text-muted-foreground py-16 hidden">
+          <h3 class="text-2xl font-bold mb-4">לא נמצאו תוצאות</h3>
+          <p>נסה מילת חיפוש אחרת או בחר קטגוריה שונה.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  // Import search utility function
+  import { searchPostElements } from '../utils/searchUtils';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const difficultyFilters = document.querySelectorAll('.difficulty-filter');
+    const tutorialsGrid = document.getElementById('tutorials-grid');
+    const noResultsMessage = document.getElementById('no-results-message');
+    
+    if (!searchInput || !tutorialsGrid || !noResultsMessage) return;
+
+    const postWrappers = tutorialsGrid.querySelectorAll('.tutorial-post-wrapper');
+    let activeCategory = 'הכל';
+    let activeDifficulty = 'הכל';
+    let allPosts = Array.from(postWrappers);
+
+    function filterPosts() {
+      const searchTerm = searchInput?.value || '';
+      
+      // First filter by category and difficulty
+      let filteredPosts = allPosts.filter(wrapper => {
+        const post = wrapper as HTMLElement;
+        const category = post.dataset.category || '';
+        const difficulty = post.dataset.difficulty || '';
+        
+        const categoryMatch = activeCategory === 'הכל' || category === activeCategory;
+        const difficultyMatch = activeDifficulty === 'הכל' || difficulty === activeDifficulty;
+        
+        return categoryMatch && difficultyMatch;
+      });
+
+      // Then apply search if there's a search term
+      if (searchTerm.trim()) {
+        const searchResults = searchPostElements(
+          document.querySelectorAll('.tutorial-post-wrapper'), 
+          searchTerm
+        );
+        
+        // Only show posts that match category, difficulty, and search
+        filteredPosts = filteredPosts.filter(post => searchResults.includes(post));
+        
+        // Reorder posts by search relevance while maintaining other filters
+        const orderedPosts: Element[] = [];
+        searchResults.forEach(searchResult => {
+          if (filteredPosts.includes(searchResult)) {
+            orderedPosts.push(searchResult);
+          }
+        });
+        filteredPosts = orderedPosts;
+      }
+
+      // Hide all posts first
+      allPosts.forEach(post => {
+        (post as HTMLElement).classList.add('hidden');
+      });
+
+      // Show filtered posts in relevance order
+      filteredPosts.forEach((post, index) => {
+        const htmlPost = post as HTMLElement;
+        htmlPost.classList.remove('hidden');
+        htmlPost.style.order = index.toString();
+      });
+
+      // Show/hide no results message
+      if (noResultsMessage) {
+        noResultsMessage.classList.toggle('hidden', filteredPosts.length > 0);
+      }
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', filterPosts);
+    }
+
+    categoryFilters.forEach((button: Element) => {
+      button.addEventListener('click', () => {
+        categoryFilters.forEach((btn: Element) => {
+          btn.classList.remove('bg-primary', 'text-primary-foreground', 'btn-gradient');
+          btn.classList.add('border', 'border-input', 'bg-background', 'hover:bg-accent', 'hover:text-accent-foreground');
+        });
+        
+        button.classList.add('btn-gradient');
+        button.classList.remove('border', 'border-input', 'bg-background', 'hover:bg-accent', 'hover:text-accent-foreground');
+        
+        activeCategory = button.getAttribute('data-category') || 'הכל';
+        filterPosts();
+      });
+    });
+
+    difficultyFilters.forEach((button: Element) => {
+      button.addEventListener('click', () => {
+        difficultyFilters.forEach((btn: Element) => {
+          btn.classList.remove('bg-primary', 'text-primary-foreground', 'btn-gradient');
+          btn.classList.add('border', 'border-input', 'bg-background', 'hover:bg-accent', 'hover:text-accent-foreground');
+        });
+        
+        button.classList.add('btn-gradient');
+        button.classList.remove('border', 'border-input', 'bg-background', 'hover:bg-accent', 'hover:text-accent-foreground');
+        
+        activeDifficulty = button.getAttribute('data-difficulty') || 'הכל';
+        filterPosts();
+      });
+    });
+
+    // Set initial active state
+    const initialActiveCategory = document.querySelector('.category-filter[data-category="הכל"]');
+    if (initialActiveCategory) {
+      initialActiveCategory.classList.add('btn-gradient');
+    }
+    const initialActiveDifficulty = document.querySelector('.difficulty-filter[data-difficulty="הכל"]');
+    if (initialActiveDifficulty) {
+      initialActiveDifficulty.classList.add('btn-gradient');
+    }
+  });
+</script>

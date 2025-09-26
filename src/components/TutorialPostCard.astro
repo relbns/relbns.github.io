@@ -1,0 +1,71 @@
+---
+import { getDifficultyColor, formatDate } from '../utils';
+
+export interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+const fm = post.data;
+---
+
+<a href={`/tutorials/${post.slug}`} class="card-professional overflow-hidden group hover:shadow-lg transition-shadow block">
+  <div class="relative overflow-hidden">
+    <img 
+      src={fm.image} 
+      alt={fm.title}
+      class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+    />
+    <div class="absolute top-4 right-4">
+      <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${getDifficultyColor(fm.difficulty)}`}>
+        {fm.difficulty}
+      </span>
+    </div>
+  </div>
+
+  <div class="p-6">
+    <div class="flex items-center justify-between mb-3">
+      <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground">
+        {fm.category}
+      </span>
+      <div class="flex items-center space-x-reverse space-x-1 text-xs text-muted-foreground">
+        <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+        <span>{fm.views.toLocaleString()}</span>
+      </div>
+    </div>
+
+    <h3 class="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
+      {fm.title}
+    </h3>
+
+    <p class="text-muted-foreground text-sm mb-4 leading-relaxed">
+      {fm.description}
+    </p>
+
+    <div class="flex flex-wrap gap-1 mb-4">
+      {fm.tags.map((tag: string) => (
+        <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <div class="flex items-center justify-between text-xs text-muted-foreground">
+      <div class="flex items-center space-x-reverse space-x-1">
+        <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>{fm.duration}</span>
+      </div>
+      <div class="flex items-center space-x-reverse space-x-1">
+        <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <span>{formatDate(fm.publishDate)}</span>
+      </div>
+    </div>
+  </div>
+</a>

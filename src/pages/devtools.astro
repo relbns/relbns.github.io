@@ -1,0 +1,166 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { siteConfig } from '../data/site-data';
+
+const toolCategories = [
+  {
+    title: "Code & Development",
+    icon: "code",
+    tools: [
+      {
+        name: "JSON Editor Online",
+        description: "Format, validate and edit JSON data online",
+        url: "https://jsoneditoronline.org/",
+        color: "text-blue-600"
+      },
+      {
+        name: "Free Formatter",
+        description: "Collection of free online formatters and validators",
+        url: "https://www.freeformatter.com/",
+        color: "text-indigo-600"
+      },
+      {
+        name: "Epoch Converter",
+        description: "Convert Unix timestamps to human readable dates",
+        url: "https://www.epochconverter.com/",
+        color: "text-cyan-600"
+      },
+      {
+        name: "Estimate My App",
+        description: "Get cost estimates for mobile app development",
+        url: "https://estimatemyapp.com/",
+        color: "text-emerald-600"
+      },
+      {
+        name: "RegEx Tester",
+        description: "Test and debug regular expressions",
+        url: "https://regex101.com/",
+        color: "text-green-600"
+      },
+      {
+        name: "Code Beautifier",
+        description: "Format and beautify HTML, CSS, JS code",
+        url: "https://codebeautify.org/",
+        color: "text-purple-600"
+      },
+      {
+        name: "Can I Use",
+        description: "Browser compatibility tables for web technologies",
+        url: "https://caniuse.com/",
+        color: "text-orange-600"
+      }
+    ]
+  },
+  {
+    title: "Performance & Testing",
+    icon: "zap",
+    tools: [
+      {
+        name: "PageSpeed Insights",
+        description: "Test website performance",
+        url: "https://pagespeed.web.dev/",
+        color: "text-green-500"
+      },
+      {
+        name: "GTmetrix",
+        description: "Website speed and performance monitoring",
+        url: "https://gtmetrix.com/",
+        color: "text-orange-500"
+      },
+      {
+        name: "Lighthouse",
+        description: "Web app quality auditing",
+        url: "https://developers.google.com/web/tools/lighthouse",
+        color: "text-blue-400"
+      },
+      {
+        name: "Pingdom",
+        description: "Website speed test",
+        url: "https://tools.pingdom.com/",
+        color: "text-red-500"
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Portfolio - Dev Tools">
+  <div class="min-h-screen bg-background">
+    <Navigation />
+    <main class="pt-24 pb-16 px-4">
+      <div class="container max-w-7xl mx-auto">
+        <PageHeader 
+          title="Developer Tools"
+          description="A curated collection of essential tools for developers. From formatters and validators to performance testing and API tools."
+        />
+
+        <!-- Tools Grid -->
+        <div class="space-y-16">
+          {toolCategories.map((category) => (
+            <div>
+              <div class="flex items-center gap-3 mb-8">
+                {category.icon === "code" ? (
+                  <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                ) : (
+                  <svg class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                )}
+                <h2 class="text-3xl font-bold">{category.title}</h2>
+              </div>
+              
+              <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {category.tools.map((tool) => (
+                  <div class="card-professional hover:shadow-lg transition-all duration-300 group">
+                    <div class="p-6">
+                      <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold">{tool.name}</h3>
+                        <svg class={`h-5 w-5 ${tool.color} opacity-70 group-hover:opacity-100 transition-opacity`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </div>
+                      <p class="text-muted-foreground mb-4 text-base leading-relaxed">
+                        {tool.description}
+                      </p>
+                      <a 
+                        href={tool.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="w-full group-hover:border-primary group-hover:text-primary inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+                      >
+                        Open Tool
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Call to Action -->
+        <div class="mt-20 text-center">
+          <div class="card-professional p-8 max-w-2xl mx-auto">
+            <h3 class="text-2xl font-bold mb-4">Missing a Tool?</h3>
+            <p class="text-muted-foreground mb-6">
+              Know of other useful developer tools that should be included? Feel free to reach out!
+            </p>
+            <a href={`mailto:${siteConfig.email}?subject=Tool Suggestion`} class="btn-gradient inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2">
+              Suggest a Tool
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

@@ -1,0 +1,10 @@
+---
+import { siteConfig } from '../data/site-data';
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-background border-t border-border py-8">
+  <div class="container max-w-7xl mx-auto text-center text-muted-foreground">
+    <p>&copy; {currentYear} {siteConfig.name}. All rights reserved.</p>
+  </div>
+</footer>

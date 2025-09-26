@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { siteConfig } from '../data/site-data';
+
+const projects = [
+  {
+    id: 1,
+    title: "E-Commerce Platform",
+    description: "A full-stack e-commerce solution built with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop",
+    technologies: ["React", "Node.js", "PostgreSQL", "Stripe", "TypeScript"],
+    github: "https://github.com/username/ecommerce",
+    demo: "https://demo-ecommerce.com",
+    stars: 124,
+    forks: 23
+  },
+  {
+    id: 2,
+    title: "Task Management App",
+    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
+    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop", 
+    technologies: ["Vue.js", "Express", "MongoDB", "Socket.io", "TailwindCSS"],
+    github: "https://github.com/username/taskapp",
+    demo: "https://demo-taskapp.com",
+    stars: 89,
+    forks: 15
+  },
+  {
+    id: 3,
+    title: "Weather Dashboard",
+    description: "A responsive weather dashboard with location-based forecasts, interactive maps, and weather alerts using modern web APIs.",
+    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=250&fit=crop",
+    technologies: ["JavaScript", "Chart.js", "OpenWeather API", "PWA"],
+    github: "https://github.com/username/weather",
+    demo: "https://demo-weather.com",
+    stars: 67,
+    forks: 12
+  },
+  {
+    id: 4,
+    title: "Portfolio CMS",
+    description: "A headless CMS built specifically for developers to manage their portfolio content with markdown support and API generation.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop",
+    technologies: ["Next.js", "Prisma", "MySQL", "Markdown", "API Routes"],
+    github: "https://github.com/username/portfolio-cms",
+    demo: "https://demo-cms.com",
+    stars: 156,
+    forks: 34
+  }
+];
+---
+
+<Layout title="Portfolio - Projects">
+  <div class="min-h-screen bg-background">
+    <Navigation />
+    <main class="py-20">
+      <div class="container max-w-7xl mx-auto px-4">
+        <PageHeader 
+          title="My Projects"
+          description="Here are some of my favorite projects that showcase my skills and passion for creating meaningful digital experiences."
+        />
+
+        <!-- Projects Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {projects.map((project) => (
+            <div class="card-professional overflow-hidden group flex flex-col h-full">
+              <!-- Project Image -->
+              <div class="relative overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+
+              <!-- Project Content -->
+              <div class="p-6 flex flex-col h-full">
+                <div class="flex items-start justify-between mb-3">
+                  <h3 class="text-xl font-bold group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <div class="flex items-center space-x-3 text-sm text-muted-foreground">
+                    <div class="flex items-center space-x-1">
+                      <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9l-5 4.74 1.18 6.26L12 17.77l-6.18 3.23L7 14.74 2 9l6.91-1.74L12 2z"/>
+                      </svg>
+                      <span>{project.stars}</span>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                      <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6 3h12l4 4v10a4 4 0 01-4 4H6a4 4 0 01-4-4V7a4 4 0 014-4z"/>
+                        <path d="M6 11V9a2 2 0 012-2h8a2 2 0 012 2v2"/>
+                      </svg>
+                      <span>{project.forks}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="text-muted-foreground mb-4 leading-relaxed">
+                  {project.description}
+                </p>
+
+                <!-- Technologies -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                  {project.technologies.map((tech) => (
+                    <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <!-- Project Links -->
+                <div class="flex space-x-3 rtl:space-x-reverse mt-auto">
+                  <a 
+                    href={project.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+                  >
+                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    Code
+                  </a>
+                  <a 
+                    href={project.demo} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="flex-1 btn-gradient inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 px-3"
+                  >
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center mt-16">
+          <div class="card-professional p-8 max-w-2xl mx-auto">
+            <h3 class="text-2xl font-bold mb-4">Interested in Collaboration?</h3>
+            <p class="text-muted-foreground mb-6">
+              I'm always open to discussing new projects and opportunities.
+            </p>
+            <a href={`mailto:${siteConfig.email}?subject=Project Inquiry`} class="btn-gradient inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2">
+              Get In Touch
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

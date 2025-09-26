@@ -1,0 +1,25 @@
+---
+import HeroIntroduction from './HeroIntroduction.astro';
+import ProfileImage from './ProfileImage.astro';
+import QuickLinks from './QuickLinks.astro';
+import SocialLinks from './SocialLinks.astro';
+---
+
+<section 
+  class="min-h-[90vh] flex items-center justify-center px-4 py-20 relative overflow-hidden"
+  style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/hero-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+>
+  <div class="container max-w-7xl mx-auto">
+    <!-- First Row: Main Content and Profile Image -->
+    <div class="grid lg:grid-cols-2 gap-12 items-center relative z-10 mb-20">
+      <HeroIntroduction />
+      <ProfileImage />
+    </div>
+
+    <!-- Second Row: Quick Links and Contact -->
+    <div class="grid lg:grid-cols-2 gap-8 relative z-10">
+      <QuickLinks />
+      <SocialLinks />
+    </div>
+  </div>
+</section>

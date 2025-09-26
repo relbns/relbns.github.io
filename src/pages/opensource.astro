@@ -1,0 +1,273 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const contributions = [
+  {
+    id: 1,
+    project: "React Router",
+    repository: "remix-run/react-router",
+    description: "Added TypeScript support for nested routing patterns and improved documentation for dynamic route matching.",
+    type: "Feature",
+    status: "Merged",
+    pullRequest: "https://github.com/remix-run/react-router/pull/1234",
+    stars: 52800,
+    language: "TypeScript"
+  },
+  {
+    id: 2,
+    project: "Tailwind CSS",
+    repository: "tailwindlabs/tailwindcss",
+    description: "Fixed responsive design utilities and contributed to the new container queries feature implementation.",
+    type: "Bug Fix",
+    status: "Merged",
+    pullRequest: "https://github.com/tailwindlabs/tailwindcss/pull/5678",
+    stars: 78200,
+    language: "JavaScript"
+  },
+  {
+    id: 3,
+    project: "Vite",
+    repository: "vitejs/vite",
+    description: "Improved hot module replacement for Vue components and optimized build performance for large projects.",
+    type: "Enhancement", 
+    status: "Under Review",
+    pullRequest: "https://github.com/vitejs/vite/pull/9012",
+    stars: 65400,
+    language: "TypeScript"
+  },
+  {
+    id: 4,
+    project: "Supabase",
+    repository: "supabase/supabase",
+    description: "Enhanced authentication flow documentation and added examples for custom OAuth providers integration.",
+    type: "Documentation",
+    status: "Merged",
+    pullRequest: "https://github.com/supabase/supabase/pull/3456",
+    stars: 68900,
+    language: "TypeScript"
+  }
+];
+
+const ownProjects = [
+  {
+    id: 1,
+    name: "dev-portfolio-template",
+    description: "A modern, responsive portfolio template for developers with dark mode, multi-language support, and easy customization.",
+    stars: 289,
+    forks: 45,
+    language: "TypeScript",
+    topics: ["portfolio", "react", "tailwindcss", "template"]
+  },
+  {
+    id: 2,
+    name: "api-rate-limiter",
+    description: "A flexible rate limiting middleware for Express.js with Redis support and multiple algorithms.",
+    stars: 156,
+    forks: 23,
+    language: "JavaScript",
+    topics: ["express", "rate-limiting", "middleware", "redis"]
+  },
+  {
+    id: 3,
+    name: "markdown-blog-generator",
+    description: "Static site generator specifically designed for developers who want to blog using Markdown with syntax highlighting.",
+    stars: 94,
+    forks: 12,
+    language: "JavaScript",
+    topics: ["static-site", "markdown", "blog", "generator"]
+  }
+];
+
+function getStatusColor(status: string) {
+  switch (status) {
+    case "Merged":
+      return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
+    case "Under Review":
+      return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200";
+    default:
+      return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200";
+  }
+}
+
+function getTypeColor(type: string) {
+  switch (type) {
+    case "Feature":
+      return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200";
+    case "Bug Fix":
+      return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200";
+    case "Enhancement":
+      return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200";
+    case "Documentation":
+      return "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200";
+    default:
+      return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200";
+  }
+}
+---
+
+<Layout title="Portfolio - Open Source">
+  <div class="min-h-screen bg-background">
+    <Navigation />
+    <main class="py-20">
+      <div class="container max-w-7xl mx-auto px-4">
+        <PageHeader 
+          title="Open Source Contributions"
+          description="I believe in giving back to the community. Here are my contributions to open source projects and my own projects that others can use and contribute to."
+        />
+
+        <!-- Contributions to Other Projects -->
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold mb-8 flex items-center">
+            <svg class="h-8 w-8 mr-3 text-primary rtl:mr-0 rtl:ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4 4m4-4l-4-4m0 8H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            Contributions to Popular Projects
+          </h2>
+          
+          <div class="grid gap-6">
+            {contributions.map((contribution) => (
+              <div class="card-professional p-6 hover:shadow-lg transition-shadow">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                  <div class="flex items-center space-x-3 rtl:space-x-reverse mb-2 md:mb-0">
+                    <h3 class="text-xl font-bold">{contribution.project}</h3>
+                    <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground">
+                      {contribution.repository}
+                    </span>
+                  </div>
+                  <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <span class={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${getTypeColor(contribution.type)}`}>
+                      {contribution.type}
+                    </span>
+                    <span class={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${getStatusColor(contribution.status)}`}>
+                      {contribution.status}
+                    </span>
+                  </div>
+                </div>
+
+                <p class="text-muted-foreground mb-4 leading-relaxed">
+                  {contribution.description}
+                </p>
+
+                <div class="flex flex-col md:flex-row md:items-center justify-between">
+                  <div class="flex items-center space-x-4 rtl:space-x-reverse text-sm text-muted-foreground mb-4 md:mb-0">
+                    <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                      <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9l-5 4.74 1.18 6.26L12 17.77l-6.18 3.23L7 14.74 2 9l6.91-1.74L12 2z"/>
+                      </svg>
+                      <span>{contribution.stars.toLocaleString()}</span>
+                    </div>
+                    <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                      <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+                        {contribution.language}
+                      </span>
+                    </div>
+                  </div>
+                  <a 
+                    href={contribution.pullRequest} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+                  >
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    View PR
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Own Open Source Projects -->
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold mb-8 flex items-center">
+            <svg class="h-8 w-8 mr-3 text-primary rtl:mr-0 rtl:ml-3" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            My Open Source Projects
+          </h2>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ownProjects.map((project) => (
+              <div class="card-professional p-6 hover:shadow-lg transition-shadow">
+                <div class="flex items-start justify-between mb-3">
+                  <h3 class="text-lg font-bold">{project.name}</h3>
+                  <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+                    {project.language}
+                  </span>
+                </div>
+
+                <p class="text-muted-foreground mb-4 text-sm leading-relaxed">
+                  {project.description}
+                </p>
+
+                <div class="flex flex-wrap gap-1 mb-4">
+                  {project.topics.map((topic) => (
+                    <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground">
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-4 rtl:space-x-reverse text-sm text-muted-foreground">
+                    <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                      <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2l3.09 6.26L22 9l-5 4.74 1.18 6.26L12 17.77l-6.18 3.23L7 14.74 2 9l6.91-1.74L12 2z"/>
+                      </svg>
+                      <span>{project.stars}</span>
+                    </div>
+                    <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                      <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6 3h12l4 4v10a4 4 0 01-4 4H6a4 4 0 01-4-4V7a4 4 0 014-4z"/>
+                        <path d="M6 11V9a2 2 0 012-2h8a2 2 0 012 2v2"/>
+                      </svg>
+                      <span>{project.forks}</span>
+                    </div>
+                  </div>
+                  <a 
+                    href={`https://github.com/username/${project.name}`}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 px-3"
+                  >
+                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    View
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="card-professional p-8 text-center">
+          <h3 class="text-2xl font-bold mb-6">Open Source Impact</h3>
+          <div class="grid md:grid-cols-4 gap-6">
+            <div>
+              <div class="text-3xl font-bold text-primary mb-2">47</div>
+              <div class="text-sm text-muted-foreground">Pull Requests</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-primary mb-2">23</div>
+              <div class="text-sm text-muted-foreground">Projects Contributed</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-primary mb-2">1.2k+</div>
+              <div class="text-sm text-muted-foreground">Stars Earned</div>
+            </div>
+            <div>
+              <div class="text-3xl font-bold text-primary mb-2">89</div>
+              <div class="text-sm text-muted-foreground">Followers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

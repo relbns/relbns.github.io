@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Professional Portfolio Design System */
+
+@layer base {
+  :root {
+    /* Professional color palette */
+    --background: 255 255 255;
+    --foreground: 15 23 42;
+
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+
+    --popover: 255 255 255;
+    --popover-foreground: 15 23 42;
+
+    --primary: 79 70 229;
+    --primary-foreground: 248 250 252;
+    --primary-glow: 109 102 235;
+
+    --secondary: 241 245 249;
+    --secondary-foreground: 51 65 85;
+
+    --muted: 248 250 252;
+    --muted-foreground: 100 116 139;
+
+    --accent: 236 72 153;
+    --accent-foreground: 248 250 252;
+
+    --destructive: 239 68 68;
+    --destructive-foreground: 248 250 252;
+
+    --border: 226 232 240;
+    --input: 226 232 240;
+    --ring: 79 70 229;
+
+    --radius: 0.75rem;
+
+    /* Professional gradients */
+    --gradient-primary: linear-gradient(135deg, rgb(79 70 229), rgb(109 102 235));
+    --gradient-hero: linear-gradient(135deg, rgb(79 70 229) 0%, rgb(236 72 153) 100%);
+    --gradient-subtle: linear-gradient(180deg, rgb(248 250 252), rgb(241 245 249));
+    --gradient-card: linear-gradient(145deg, rgb(255 255 255), rgb(248 250 252));
+
+    /* Professional shadows */
+    --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-large: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 20px rgb(79 70 229 / 0.2);
+
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    /* Dark theme color palette */
+    --background: 15 23 42;
+    --foreground: 248 250 252;
+
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
+
+    --popover: 30 41 59;
+    --popover-foreground: 248 250 252;
+
+    --primary: 109 102 235;
+    --primary-foreground: 15 23 42;
+    --primary-glow: 129 122 245;
+
+    --secondary: 51 65 85;
+    --secondary-foreground: 226 232 240;
+
+    --muted: 51 65 85;
+    --muted-foreground: 148 163 184;
+
+    --accent: 236 72 153;
+    --accent-foreground: 15 23 42;
+
+    --destructive: 239 68 68;
+    --destructive-foreground: 248 250 252;
+
+    --border: 51 65 85;
+    --input: 51 65 85;
+    --ring: 109 102 235;
+
+    /* Dark theme gradients */
+    --gradient-primary: linear-gradient(135deg, rgb(109 102 235), rgb(129 122 245));
+    --gradient-hero: linear-gradient(135deg, rgb(109 102 235) 0%, rgb(236 72 153) 100%);
+    --gradient-subtle: linear-gradient(180deg, rgb(30 41 59), rgb(51 65 85));
+    --gradient-card: linear-gradient(145deg, rgb(30 41 59), rgb(51 65 85));
+
+    /* Dark theme shadows */
+    --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+    --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-large: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+    --shadow-glow: 0 0 20px rgb(109 102 235 / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* RTL Support */
+  [dir="rtl"] {
+    direction: rtl;
+  }
+
+  [dir="rtl"] .rtl\:text-right {
+    text-align: right;
+  }
+
+  [dir="rtl"] .rtl\:flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+@layer components {
+  /* Professional card styles */
+  .card-professional {
+    @apply bg-card text-card-foreground rounded-lg border shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-medium)] transition-[var(--transition-smooth)];
+    background: var(--gradient-card);
+  }
+
+  /* Hero gradient text */
+  .hero-gradient-text {
+    background: var(--gradient-hero);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Smooth hover scale */
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  /* Professional glow effect */
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Professional button gradient */
+  .btn-gradient {
+    background: var(--gradient-primary);
+    @apply text-primary-foreground shadow-[var(--shadow-medium)] hover:shadow-[var(--shadow-large)] transition-[var(--transition-smooth)] hover-scale;
+  }
+
+  .title-line-height {
+    @apply leading-tight;
+  }
+}

@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { siteConfig } from '../data/site-data';
+---
+
+<Layout title="Portfolio - About Me" description="Learn more about my journey as a full-stack developer">
+  <div class="min-h-screen bg-background">
+    <Navigation />
+    <main class="py-20">
+      <div class="container max-w-4xl mx-auto px-4">
+        <PageHeader 
+          title="About Me"
+          description="My journey as a passionate developer crafting digital experiences with modern technologies."
+        />
+
+        <!-- Profile Section -->
+        <div class="card-professional p-8 mb-12">
+          <div class="grid md:grid-cols-3 gap-8 items-center">
+            <div class="md:col-span-1 flex justify-center">
+              <div class="relative">
+                <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
+                  <img 
+                    src="/profile-image.png" 
+                    alt="Ariel Benesh" 
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-accent/10 pointer-events-none"></div>
+              </div>
+            </div>
+            <div class="md:col-span-2 space-y-4">
+              <h2 class="text-2xl font-bold">Ariel Benesh</h2>
+              <p class="text-lg text-primary font-medium">Full-Stack Developer & Open Source Enthusiast</p>
+              <p class="text-muted-foreground leading-relaxed">
+                I'm a software developer with a passion for creating impactful digital solutions. 
+                My journey in technology spans various domains, from frontend development to open source contributions. 
+                I believe in sharing knowledge and contributing to the developer community through tutorials, 
+                blog posts, and open source projects.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="card-professional p-8 mb-12">
+          <h3 class="text-2xl font-bold mb-6">Technical Skills</h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div>
+              <h4 class="font-semibold mb-3 text-primary">Frontend</h4>
+              <ul class="space-y-2 text-muted-foreground">
+                <li>React & Next.js</li>
+                <li>TypeScript</li>
+                <li>Tailwind CSS</li>
+                <li>Vue.js</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-3 text-primary">Backend</h4>
+              <ul class="space-y-2 text-muted-foreground">
+                <li>Node.js</li>
+                <li>Python</li>
+                <li>PostgreSQL</li>
+                <li>MongoDB</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-3 text-primary">Tools & Others</h4>
+              <ul class="space-y-2 text-muted-foreground">
+                <li>Git & GitHub</li>
+                <li>Docker</li>
+                <li>AWS</li>
+                <li>Linux</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="card-professional p-8 mb-12">
+          <h3 class="text-2xl font-bold mb-6">Experience</h3>
+          <div class="space-y-6">
+            <div class="border-l-4 border-primary pl-6">
+              <h4 class="font-semibold text-lg">Senior Full-Stack Developer</h4>
+              <p class="text-primary font-medium">Tech Company • 2022 - Present</p>
+              <p class="text-muted-foreground mt-2">
+                Leading development of modern web applications using React, Node.js, and cloud technologies. 
+                Mentoring junior developers and contributing to architectural decisions.
+              </p>
+            </div>
+            <div class="border-l-4 border-muted pl-6">
+              <h4 class="font-semibold text-lg">Full-Stack Developer</h4>
+              <p class="text-muted-foreground font-medium">Previous Company • 2020 - 2022</p>
+              <p class="text-muted-foreground mt-2">
+                Developed and maintained multiple web applications, implemented CI/CD pipelines, 
+                and collaborated with cross-functional teams to deliver high-quality software.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="card-professional p-8 text-center">
+          <h3 class="text-2xl font-bold mb-4">Let's Work Together</h3>
+          <p class="text-muted-foreground mb-6 max-w-2xl mx-auto">
+            I'm always interested in new opportunities and exciting projects. 
+            Feel free to reach out if you'd like to collaborate or just have a chat about technology.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a 
+              href={`mailto:${siteConfig.email}?subject=Let's Connect`}
+              class="btn-gradient inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2"
+            >
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Get In Touch
+            </a>
+            <a 
+              href="/cv.pdf"
+              download
+              class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+            >
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download CV
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>

@@ -1,0 +1,26 @@
+---
+import Button from './Button.astro';
+import { siteConfig } from '../data/site-data';
+
+interface Props {
+  title?: string;
+  description?: string;
+  buttonText?: string;
+  buttonUrl?: string;
+}
+
+const {
+  title = "Let's work together",
+  description = "Have a project in mind? I'm available for freelance work.",
+  buttonText = "Get in Touch",
+  buttonUrl = `mailto:${siteConfig.email}`,
+} = Astro.props;
+---
+
+<section class="py-20 px-4 bg-secondary">
+  <div class="container max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl font-bold mb-4">{title}</h2>
+    <p class="text-muted-foreground text-xl mb-8">{description}</p>
+    <Button href={buttonUrl} text={buttonText} />
+  </div>
+</section>

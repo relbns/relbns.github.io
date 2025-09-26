@@ -1,0 +1,195 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import PageHeader from '../components/PageHeader.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import { getCategoryColor, formatDate } from '../utils';
+import { extractUniqueTags } from '../utils/searchUtils';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+
+const featuredPost = sortedPosts.find(post => post.data.featured);
+const regularPosts = sortedPosts.filter(post => !post.data.featured);
+
+const categories = ["הכל", ...new Set(allPosts.map(post => post.data.category))];
+const allTags = extractUniqueTags(allPosts);
+---
+
+<Layout title="Portfolio - Blog" description="מחשבות, חוויות וידע מעולם הפיתוח">
+  <div class="min-h-screen bg-background" dir="rtl">
+    <Navigation />
+    <main class="py-20">
+      <div class="container max-w-7xl mx-auto px-4">
+        <PageHeader 
+          title="הבלוג שלי"
+          description="מחשבות, חוויות וידע מעולם הפיתוח. כאן אני משתף את המסע שלי, הלקחים שלמדתי והטיפים שעוזרים לי ביום יום."
+        />
+
+        <!-- Search and Filter -->
+        <div class="flex flex-col md:flex-row gap-4 mb-12">
+          <div class="relative flex-grow">
+            <input type="search" id="search-input" placeholder="חיפוש פוסטים..." class="w-full px-4 py-2 pl-10 rounded-lg border bg-background" />
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="h-5 w-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </div>
+          </div>
+          <div class="flex flex-wrap justify-center gap-2">
+            {categories.map((category) => (
+              <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 category-filter" data-category={category}>
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Featured Post -->
+        {featuredPost && (
+          <a href={`/blog/${featuredPost.slug}`} class="card-professional mb-16 overflow-hidden md:flex group">
+            <div class="md:w-1/2">
+              <img 
+                src={featuredPost.data.image} 
+                alt={featuredPost.data.title}
+                class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="md:w-1/2 p-8 flex flex-col">
+              <div class="flex items-center space-x-reverse space-x-3 mb-4">
+                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold bg-primary text-primary-foreground">מומלץ</span>
+                <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${getCategoryColor(featuredPost.data.category)}`}>
+                  {featuredPost.data.category}
+                </span>
+              </div>
+              <h2 class="text-2xl md:text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
+                {featuredPost.data.title}
+              </h2>
+              <p class="text-muted-foreground mb-6 leading-relaxed flex-grow">
+                {featuredPost.data.excerpt}
+              </p>
+              <div class="flex items-center space-x-reverse space-x-6 text-sm text-muted-foreground">
+                <div class="flex items-center space-x-reverse space-x-1">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                  <span>{formatDate(featuredPost.data.publishDate)}</span>
+                </div>
+                <div class="flex items-center space-x-reverse space-x-1">
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>{featuredPost.data.readTime}</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        )}
+
+        <!-- Blog Posts Grid -->
+        <div id="blog-posts-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {regularPosts.map((post) => (
+            <div class="blog-post-wrapper" 
+                 data-title={post.data.title} 
+                 data-category={post.data.category} 
+                 data-description={post.data.description || ''} 
+                 data-excerpt={post.data.excerpt || ''} 
+                 data-tags={post.data.tags.join(',')}>
+              <BlogPostCard post={post} />
+            </div>
+          ))}
+        </div>
+        <div id="no-results-message" class="text-center text-muted-foreground py-16 hidden">
+          <h3 class="text-2xl font-bold mb-4">לא נמצאו תוצאות</h3>
+          <p>נסה מילת חיפוש אחרת או בחר קטגוריה שונה.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  // Import search utility function
+  import { searchPostElements } from '../utils/searchUtils';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
+    const categoryFilters = document.querySelectorAll('.category-filter');
+    const postsGrid = document.getElementById('blog-posts-grid');
+    const noResultsMessage = document.getElementById('no-results-message');
+    
+    if (!searchInput || !postsGrid || !noResultsMessage) return;
+
+    const postWrappers = postsGrid.querySelectorAll('.blog-post-wrapper');
+    let activeCategory = 'הכל';
+    let allPosts = Array.from(postWrappers);
+
+    function filterPosts() {
+      const searchTerm = searchInput?.value || '';
+      
+      // First filter by category
+      let filteredPosts = allPosts.filter(wrapper => {
+        const post = wrapper as HTMLElement;
+        const category = post.dataset.category || '';
+        return activeCategory === 'הכל' || category === activeCategory;
+      });
+
+      // Then apply search if there's a search term
+      if (searchTerm.trim()) {
+        const searchResults = searchPostElements(
+          document.querySelectorAll('.blog-post-wrapper'), 
+          searchTerm
+        );
+        
+        // Only show posts that match both category and search
+        filteredPosts = filteredPosts.filter(post => searchResults.includes(post));
+        
+        // Reorder posts by search relevance while maintaining category filter
+        const orderedPosts: Element[] = [];
+        searchResults.forEach(searchResult => {
+          if (filteredPosts.includes(searchResult)) {
+            orderedPosts.push(searchResult);
+          }
+        });
+        filteredPosts = orderedPosts;
+      }
+
+      // Hide all posts first
+      allPosts.forEach(post => {
+        (post as HTMLElement).classList.add('hidden');
+      });
+
+      // Show filtered posts in relevance order
+      filteredPosts.forEach((post, index) => {
+        const htmlPost = post as HTMLElement;
+        htmlPost.classList.remove('hidden');
+        htmlPost.style.order = index.toString();
+      });
+
+      // Show/hide no results message
+      if (noResultsMessage) {
+        noResultsMessage.classList.toggle('hidden', filteredPosts.length > 0);
+      }
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', filterPosts);
+    }
+
+    categoryFilters.forEach(button => {
+      button.addEventListener('click', () => {
+        categoryFilters.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-primary-foreground', 'btn-gradient');
+          btn.classList.add('border', 'border-input', 'bg-background', 'hover:bg-accent', 'hover:text-accent-foreground');
+        });
+        
+        button.classList.add('btn-gradient');
+        button.classList.remove('border', 'border-input', 'bg-background', 'hover:bg-accent', 'hover:text-accent-foreground');
+        
+        activeCategory = button.getAttribute('data-category') || 'הכל';
+        filterPosts();
+      });
+    });
+
+    // Set initial active state
+    const initialActiveButton = document.querySelector('.category-filter[data-category="הכל"]');
+    if (initialActiveButton) {
+      initialActiveButton.classList.add('btn-gradient');
+    }
+  });
+</script>

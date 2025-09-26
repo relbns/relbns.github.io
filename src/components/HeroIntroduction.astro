@@ -1,0 +1,29 @@
+---
+import { siteConfig } from '../data/site-data';
+import Button from './Button.astro';
+import DownloadCVButton from './DownloadCVButton.astro';
+---
+
+<div class="text-center lg:text-left rtl:lg:text-right space-y-8">
+  <div class="space-y-6">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white drop-shadow-2xl">
+      Hi 👋🏻, <br />
+      I'm{" "}
+      <span class="hero-gradient-text drop-shadow-2xl">
+        {siteConfig.name}
+      </span>
+    </h1>
+    <p class="text-xl md:text-2xl text-white max-w-3xl lg:max-w-none mx-auto lg:mx-0 rtl:lg:mx-0 leading-relaxed drop-shadow-2xl font-medium">
+      {siteConfig.description}
+    </p>
+    
+    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start rtl:lg:justify-end items-center mt-8">
+      <Button href="/about" text="About Me">
+        <svg class="h-5 w-5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </Button>
+      <DownloadCVButton />
+    </div>
+  </div>
+</div>

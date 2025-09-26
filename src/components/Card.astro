@@ -1,0 +1,80 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  link?: string;
+  tags?: string[];
+  date?: string;
+}
+
+const { title, description, image, link, tags = [], date } = Astro.props;
+---
+
+<div class="card-professional group hover:shadow-lg transition-all duration-300">
+  {image && (
+    <div class="mb-4 overflow-hidden rounded-lg">
+      <img 
+        src={image} 
+        alt={title} 
+        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+    </div>
+  )}
+  
+  <div class="space-y-3 p-6">
+    <div class="flex items-start justify-between">
+      <h3 class="text-xl font-semibold group-hover:text-primary transition-colors">
+        {link ? (
+          <a href={link} class="hover:underline">
+            {title}
+          </a>
+        ) : (
+          title
+        )}
+      </h3>
+      {date && (
+        <span class="text-sm text-muted-foreground whitespace-nowrap ml-4 rtl:ml-0 rtl:mr-4">
+          {new Date(date).toLocaleDateString()}
+        </span>
+      )}
+    </div>
+    
+    {description && (
+      <p class="text-muted-foreground leading-relaxed">
+        {description}
+      </p>
+    )}
+    
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <span class="inline-flex items-center rounded-md bg-secondary px-2 py-1 text-xs font-medium text-secondary-foreground ring-1 ring-inset ring-secondary">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+    
+    {link && (
+      <div class="pt-2">
+        <a 
+          href={link} 
+          class="inline-flex items-center text-primary hover:text-primary/80 transition-colors font-medium"
+        >
+          Read more
+          <svg class="w-4 h-4 ml-2 rtl:ml-0 rtl:mr-2 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
+</div>="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
+</div>

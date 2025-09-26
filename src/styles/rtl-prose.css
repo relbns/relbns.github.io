@@ -1,0 +1,227 @@
+/* RTL Prose Styles - Shared between blog and tutorial pages */
+
+/* RTL-specific prose styles */
+.prose {
+  direction: rtl;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  text-align: right;
+}
+
+.prose p,
+.prose li {
+  text-align: right;
+}
+
+.prose ul,
+.prose ol {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+.prose blockquote {
+  border-right: 4px solid #e5e7eb;
+  border-left: none;
+  padding-right: 1rem;
+  padding-left: 0;
+}
+
+/* Code blocks - force LTR direction and fix colors with stronger specificity */
+.prose code {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+.prose pre {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
+  padding: 1rem !important;
+  border-radius: 0.5rem !important;
+  overflow-x: auto !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+.prose pre code {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+  background: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: 0.875rem !important;
+  font-family: inherit !important;
+}
+
+/* Additional overrides to ensure LTR for all code elements */
+[dir="rtl"] .prose code,
+[dir="rtl"] .prose pre,
+[dir="rtl"] .prose pre code {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+}
+
+/* Force LTR for any code block regardless of parent direction */
+code, pre, pre code {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+}
+
+/* Inline code styling */
+.prose :not(pre) > code {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: embed;
+  background: #f3f4f6 !important;
+  color: #1f2937 !important;
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.25rem !important;
+  font-size: 0.875rem !important;
+  font-family: 'Courier New', Courier, monospace !important;
+}
+
+/* Dark mode inline code */
+@media (prefers-color-scheme: dark) {
+  .prose :not(pre) > code {
+    background: #374151 !important;
+    color: #f9fafb !important;
+  }
+}
+
+/* Ensure all code-related elements are LTR */
+.prose code[class*="language-"],
+.prose pre[class*="language-"] {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: embed;
+}
+
+/* Handle syntax highlighting classes */
+.prose .token {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Syntax highlighting colors - VS Code Dark theme */
+.prose .token.comment,
+.prose .token.prolog,
+.prose .token.doctype,
+.prose .token.cdata {
+  color: #6a9955 !important;
+}
+
+.prose .token.punctuation {
+  color: #d4d4d4 !important;
+}
+
+.prose .token.property,
+.prose .token.tag,
+.prose .token.boolean,
+.prose .token.number,
+.prose .token.constant,
+.prose .token.symbol,
+.prose .token.deleted {
+  color: #b5cea8 !important;
+}
+
+.prose .token.selector,
+.prose .token.attr-name,
+.prose .token.string,
+.prose .token.char,
+.prose .token.builtin,
+.prose .token.inserted {
+  color: #ce9178 !important;
+}
+
+.prose .token.operator,
+.prose .token.entity,
+.prose .token.url,
+.prose .language-css .token.string,
+.prose .style .token.string {
+  color: #d4d4d4 !important;
+}
+
+.prose .token.atrule,
+.prose .token.attr-value,
+.prose .token.keyword {
+  color: #569cd6 !important;
+}
+
+.prose .token.function,
+.prose .token.class-name {
+  color: #dcdcaa !important;
+}
+
+.prose .token.regex,
+.prose .token.important,
+.prose .token.variable {
+  color: #d16969 !important;
+}
+
+/* Additional improvements for better code readability */
+.prose pre {
+  /* Better scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: #4a5568 #2d3748;
+}
+
+.prose pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.prose pre::-webkit-scrollbar-track {
+  background: #2d3748;
+  border-radius: 4px;
+}
+
+.prose pre::-webkit-scrollbar-thumb {
+  background: #4a5568;
+  border-radius: 4px;
+}
+
+.prose pre::-webkit-scrollbar-thumb:hover {
+  background: #718096;
+}
+
+/* Line numbers support (if using a syntax highlighter that supports it) */
+.prose .line-numbers .line-numbers-rows {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Copy button positioning for RTL */
+.prose pre[data-copy] {
+  position: relative;
+}
+
+.prose pre[data-copy]::after {
+  content: "Copy";
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem; /* Changed from right to left for RTL context */
+  background: rgba(255, 255, 255, 0.1);
+  color: #d4d4d4;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.prose pre[data-copy]:hover::after {
+  opacity: 1;
+}
