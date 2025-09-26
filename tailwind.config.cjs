@@ -5,38 +5,38 @@ export default {
   theme: {
     extend: {
       colors: {
-        border: 'rgb(226 232 240)',
-        input: 'rgb(226 232 240)',
-        ring: 'rgb(79 70 229)',
-        background: 'rgb(255 255 255)',
-        foreground: 'rgb(15 23 42)',
+        border: 'rgb(var(--border) / <alpha-value>)',
+        input: 'rgb(var(--input) / <alpha-value>)',
+        ring: 'rgb(var(--ring) / <alpha-value>)',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        foreground: 'rgb(var(--foreground) / <alpha-value>)',
         primary: {
-          DEFAULT: 'rgb(79 70 229)',
-          foreground: 'rgb(248 250 252)',
+          DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
+          foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
         },
         secondary: {
-          DEFAULT: 'rgb(241 245 249)',
-          foreground: 'rgb(51 65 85)',
+          DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
+          foreground: 'rgb(var(--secondary-foreground) / <alpha-value>)',
         },
         destructive: {
-          DEFAULT: 'rgb(239 68 68)',
-          foreground: 'rgb(248 250 252)',
+          DEFAULT: 'rgb(var(--destructive) / <alpha-value>)',
+          foreground: 'rgb(var(--destructive-foreground) / <alpha-value>)',
         },
         muted: {
-          DEFAULT: 'rgb(248 250 252)',
-          foreground: 'rgb(100 116 139)',
+          DEFAULT: 'rgb(var(--muted) / <alpha-value>)',
+          foreground: 'rgb(var(--muted-foreground) / <alpha-value>)',
         },
         accent: {
-          DEFAULT: 'rgb(236 72 153)',
-          foreground: 'rgb(248 250 252)',
+          DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+          foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
         },
         popover: {
-          DEFAULT: 'rgb(255 255 255)',
-          foreground: 'rgb(15 23 42)',
+          DEFAULT: 'rgb(var(--popover) / <alpha-value>)',
+          foreground: 'rgb(var(--popover-foreground) / <alpha-value>)',
         },
         card: {
-          DEFAULT: 'rgb(255 255 255)',
-          foreground: 'rgb(15 23 42)',
+          DEFAULT: 'rgb(var(--card) / <alpha-value>)',
+          foreground: 'rgb(var(--card-foreground) / <alpha-value>)',
         },
       },
       fontFamily: {

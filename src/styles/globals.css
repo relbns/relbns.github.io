@@ -162,4 +162,26 @@
   .title-line-height {
     @apply leading-tight;
   }
+
+  /* Theme-aware hero background */
+  .hero-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .dark .hero-bg {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/hero-bg.jpg');
+  }
+
+  /* Smooth theme transitions */
+  * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Ensure smooth transitions don't affect transforms and other properties */
+  *:hover {
+    transition: all 0.3s ease;
+  }
 }
