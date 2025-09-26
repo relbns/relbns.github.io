@@ -21,7 +21,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // Read package.json to get version
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
 const appVersion = packageJson.version;
-const commitHash = import.meta.env.VITE_COMMIT_HASH || '2b718a5fcaf298e5295ab7e0dbb85c9d8ac19b5e';
+
+// Get commit hash from environment variable (set by CI/CD pipeline)
+const commitHash = import.meta.env.VITE_COMMIT_HASH || 'dev-local';
+const shortCommitHash = commitHash.substring(0, 7);
 ---
 
 <!doctype html>
@@ -66,9 +69,9 @@ const commitHash = import.meta.env.VITE_COMMIT_HASH || '2b718a5fcaf298e5295ab7e0
   </body>
 </html>
 
-<script define:vars={{ appVersion, commitHash }}>
+<script define:vars={{ appVersion, shortCommitHash }}>
   // Log deployment info
-  console.log(`Deployed version: ${appVersion}, commit: ${commitHash}`);
+  console.log(`Deployed version: ${appVersion}, commit: ${shortCommitHash}`);
 
   // Theme functionality
   const getThemePreference = () => {

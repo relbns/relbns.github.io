@@ -60,6 +60,11 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
         
+      - name: Create .env file
+        run: |
+          echo "VITE_COMMIT_HASH=${{ github.sha }}" >> .env
+        working-directory: ${{ env.BUILD_PATH }}
+        
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
