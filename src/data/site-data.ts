@@ -2,30 +2,35 @@ export const siteConfig = {
   name: "Ariel Benesh",
   title: "Ariel Benesh | Passionate Developer",
   description: "A passionate developer crafting digital experiences with modern technologies. Specializing in web development, open source contributions, and sharing knowledge.",
-  email: "contact@arielbenesh.com",
-  cvUrl: "https://docs.google.com/document/d/1nNcCVciEMYPUiTC8xH8f8Nvy6lHqkAM4/export?format=pdf",
-  googleTagId: "G-W59QQ6KSYH", // Replace with your Google Tag ID
+  email: "ariel.benesh+portfolio@gmail.com",
+  cvUrl: "https://docs.google.com/document/d/1sr10yGLu2IMsQeENxkGaFtvxDeMBXlpf/export?format=pdf",
+  googleTagId: "G-W59QQ6KSYH",
 };
 
 export const socialLinks = [
   {
     name: "GitHub",
-    url: "https://github.com/ArielBenesh",
+    url: "https://github.com/relbns",
     icon: "github", // Corresponds to an icon component
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/ariel-benesh/",
+    url: "https://www.linkedin.com/in/relbns/",
     icon: "linkedin",
   },
+  // {
+  //   name: "Twitter",
+  //   url: "https://twitter.com/username",
+  //   icon: "twitter",
+  // },
   {
-    name: "Twitter",
-    url: "https://twitter.com/ArielBenesh",
-    icon: "twitter",
+    name: "Stack Overflow",
+    url: "https://stackoverflow.com/users/11263188/relbns",
+    icon: "stackoverflow",
   },
   {
     name: "Email",
-    url: "mailto:contact@arielbenesh.com",
+    url: "mailto:ariel.benesh+portfolio@gmail.com",
     icon: "email",
   },
 ];

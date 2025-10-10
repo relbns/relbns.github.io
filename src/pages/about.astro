@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { siteConfig } from '../data/site-data';
+import DownloadCVButton from '@/components/DownloadCVButton.astro';
 ---
 
 <Layout title="Portfolio - About Me" description="Learn more about my journey as a full-stack developer">
@@ -12,93 +13,112 @@ import { siteConfig } from '../data/site-data';
       <div class="container max-w-4xl mx-auto px-4">
         <PageHeader 
           title="About Me"
-          description="My journey as a passionate developer crafting digital experiences with modern technologies."
+            description="Software Engineer passionate about building reliable and elegant digital solutions."
         />
 
         <!-- Profile Section -->
         <div class="card-professional p-8 mb-12">
-          <div class="grid md:grid-cols-3 gap-8 items-center">
-            <div class="md:col-span-1 flex justify-center">
-              <div class="relative">
+    <div class="grid md:grid-cols-3 gap-8 items-center">
+        <div class="md:col-span-1 flex justify-center">
+            <div class="relative">
                 <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl">
-                  <img 
-                    src="/profile-image.png" 
-                    alt="Ariel Benesh" 
-                    class="w-full h-full object-cover"
-                  />
+                    <img src="/profile-image.png" alt="Ariel Benesh" class="w-full h-full object-cover" />
                 </div>
-                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-accent/10 pointer-events-none"></div>
-              </div>
+                <div
+                    class="absolute inset-0 rounded-full bg-gradient-to-tr from-primary/10 to-accent/10 pointer-events-none">
+                </div>
             </div>
-            <div class="md:col-span-2 space-y-4">
-              <h2 class="text-2xl font-bold">Ariel Benesh</h2>
-              <p class="text-lg text-primary font-medium">Full-Stack Developer & Open Source Enthusiast</p>
-              <p class="text-muted-foreground leading-relaxed">
-                I'm a software developer with a passion for creating impactful digital solutions. 
-                My journey in technology spans various domains, from frontend development to open source contributions. 
-                I believe in sharing knowledge and contributing to the developer community through tutorials, 
-                blog posts, and open source projects.
-              </p>
-            </div>
-          </div>
         </div>
+        <div class="md:col-span-2 space-y-4">
+          <h2 class="text-2xl font-bold">Ariel Benesh</h2>
+          <p class="text-lg text-primary font-medium">Full-Stack / Backend Developer</p>
+          <p class="text-muted-foreground leading-relaxed">
+              I'm a developer who loves using technology to solve both complex and everyday problems. 
+I enjoy staying up to date with new technologies and exploring how AI can enhance development workflows. 
+I also like contributing to open-source projects - whether by improving existing tools or creating new ones.
+          </p>
+      </div>
+    </div>
+</div>
 
-        <!-- Skills Section -->
-        <div class="card-professional p-8 mb-12">
-          <h3 class="text-2xl font-bold mb-6">Technical Skills</h3>
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div>
-              <h4 class="font-semibold mb-3 text-primary">Frontend</h4>
-              <ul class="space-y-2 text-muted-foreground">
-                <li>React & Next.js</li>
-                <li>TypeScript</li>
-                <li>Tailwind CSS</li>
-                <li>Vue.js</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-3 text-primary">Backend</h4>
-              <ul class="space-y-2 text-muted-foreground">
-                <li>Node.js</li>
-                <li>Python</li>
-                <li>PostgreSQL</li>
-                <li>MongoDB</li>
-              </ul>
-            </div>
-            <div>
-              <h4 class="font-semibold mb-3 text-primary">Tools & Others</h4>
-              <ul class="space-y-2 text-muted-foreground">
-                <li>Git & GitHub</li>
-                <li>Docker</li>
-                <li>AWS</li>
-                <li>Linux</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+<!-- Skills Section -->
+<div class="card-professional p-8 mb-12">
+  <h3 class="text-2xl font-bold mb-6">Technical Skills</h3>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+    <div>
+      <h4 class="font-semibold mb-3 text-primary">Frontend</h4>
+      <ul class="space-y-2 text-muted-foreground">
+        <li>React (TypeScript)</li>
+        <li>SCSS / Tailwind CSS</li>
+        <li>Redux</li>
+        <li>Vite</li>
+      </ul>
+    </div>
 
-        <!-- Experience Section -->
-        <div class="card-professional p-8 mb-12">
-          <h3 class="text-2xl font-bold mb-6">Experience</h3>
-          <div class="space-y-6">
-            <div class="border-l-4 border-primary pl-6">
-              <h4 class="font-semibold text-lg">Senior Full-Stack Developer</h4>
-              <p class="text-primary font-medium">Tech Company • 2022 - Present</p>
-              <p class="text-muted-foreground mt-2">
-                Leading development of modern web applications using React, Node.js, and cloud technologies. 
-                Mentoring junior developers and contributing to architectural decisions.
-              </p>
-            </div>
-            <div class="border-l-4 border-muted pl-6">
-              <h4 class="font-semibold text-lg">Full-Stack Developer</h4>
-              <p class="text-muted-foreground font-medium">Previous Company • 2020 - 2022</p>
-              <p class="text-muted-foreground mt-2">
-                Developed and maintained multiple web applications, implemented CI/CD pipelines, 
-                and collaborated with cross-functional teams to deliver high-quality software.
-              </p>
-            </div>
-          </div>
-        </div>
+    <div>
+      <h4 class="font-semibold mb-3 text-primary">Backend</h4>
+      <ul class="space-y-2 text-muted-foreground">
+        <li>Node.js</li>
+        <li>NestJS</li>
+        <li>MongoDB (Atlas Search)</li>
+        <li>GraphQL / REST APIs</li>
+        <li>Serverless architectures</li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="font-semibold mb-3 text-primary">Cloud & Tools</h4>
+      <ul class="space-y-2 text-muted-foreground">
+        <li>AWS (Lambda, Step Functions, S3, Cognito)</li>
+        <li>CI/CD – GitHub Actions, Jenkins, CircleCI</li>
+        <li>Docker & Linux</li>
+        <li>Cursor & Cline</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- Experience Section -->
+<div class="card-professional p-8 mb-12">
+  <h3 class="text-2xl font-bold mb-6">Experience</h3>
+  <div class="space-y-6">
+
+    <div class="border-l-4 border-primary pl-6">
+      <h4 class="font-semibold text-lg">Software Engineer</h4>
+      <p class="text-primary font-medium">Fiverr • 2021 – 2025</p>
+      <p class="text-muted-foreground mt-2">
+        Led end-to-end development of web features using Node.js, NestJS, React, and AWS.
+        Worked across architecture, implementation, and deployment to build scalable cloud-based systems.
+      </p>
+    </div>
+
+    <div class="border-l-4 border-muted pl-6">
+      <h4 class="font-semibold text-lg">Full-Stack Developer</h4>
+      <p class="text-muted-foreground font-medium">Algotext • 2019 – 2021</p>
+      <p class="text-muted-foreground mt-2">
+        Built and deployed web solutions integrating Java (Spring Boot), Angular, and AWS.
+        Focused on backend development and data indexing with Elasticsearch.
+      </p>
+    </div>
+
+  </div>
+
+<div class="mt-8 p-4 rounded-xl bg-muted/30 text-center text-sm">
+  <p class="text-muted-foreground">
+    Want to learn more?  
+    <a
+      href="https://linkedin.com/in/relbns"
+      target="_blank"
+      class="text-primary font-medium hover:underline hover:text-accent transition-colors"
+    >
+      Visit my LinkedIn profile →
+    </a>
+  </p>
+</div>
+
+</div>
 
         <!-- Contact CTA -->
         <div class="card-professional p-8 text-center">
@@ -118,7 +138,7 @@ import { siteConfig } from '../data/site-data';
               Get In Touch
             </a>
             <a 
-              href="/cv.pdf"
+              href={siteConfig.cvUrl}
               download
               class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
             >

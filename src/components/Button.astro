@@ -4,9 +4,10 @@ interface Props {
   text: string;
   variant?: 'primary' | 'secondary';
   className?: string;
+  download?: string | boolean;
 }
 
-const { href, text, variant = 'primary', className } = Astro.props;
+const { href, text, variant = 'primary', className, download } = Astro.props;
 
 const baseClasses = "text-lg px-8 py-3 h-auto rounded-md inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
 
@@ -16,7 +17,7 @@ const variantClasses = {
 };
 ---
 
-<a href={href} class:list={[baseClasses, variantClasses[variant], className]}>
+<a href={href} class:list={[baseClasses, variantClasses[variant], className]}  {...(download ? { download } : {})}>
   {text}
   <slot />
 </a>
