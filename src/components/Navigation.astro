@@ -4,7 +4,6 @@ import ThemeToggle from './ThemeToggle.astro';
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
-  { name: "Open Source", href: "/opensource" },
   { name: "Dev Tools", href: "/devtools" },
   { name: "מדריכים", href: "/tutorials" },
   { name: "בלוג", href: "/blog" },
@@ -154,8 +153,7 @@ function isActiveNavItem(itemHref: string, currentPath: string): boolean {
 
   const searchData: SearchItem[] = [
     { title: "Home", url: "/", content: "Ariel Benesh passionate developer crafting digital experiences modern technologies web development open source" },
-    { title: "Projects", url: "/projects", content: "portfolio projects web applications software development" },
-    { title: "Open Source", url: "/opensource", content: "open source contributions github repositories community projects" },
+    { title: "Projects", url: "/projects", content: "portfolio projects web applications software development tools libraries open source contributions" },
     { title: "Dev Tools", url: "/devtools", content: "development tools utilities productivity software" },
     { title: "מדריכים", url: "/tutorials", content: "tutorials learning guides react typescript css security web development hebrew" },
     { title: "בלוג", url: "/blog", content: "blog posts articles thoughts experiences web development career technology trends hebrew" }

@@ -39,5 +39,4 @@ export const quickLinks = [
     { name: "Projects", url: "/projects", icon: "projects" },
     { name: "Tutorials", url: "/tutorials", icon: "tutorials" },
     { name: "Blog", url: "/blog", icon: "blog" },
-    { name: "Open Source", url: "/opensource", icon: "opensource" },
 ];

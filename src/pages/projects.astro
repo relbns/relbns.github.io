@@ -4,52 +4,130 @@ import Navigation from '../components/Navigation.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { siteConfig } from '../data/site-data';
 
-const projects = [
+const tools = [
   {
     id: 1,
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce solution built with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, and admin dashboard.",
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop",
-    technologies: ["React", "Node.js", "PostgreSQL", "Stripe", "TypeScript"],
-    github: "https://github.com/username/ecommerce",
-    demo: "https://demo-ecommerce.com",
-    stars: 124,
-    forks: 23
+    name: "Mac Insomnia",
+    description: "A macOS application for managing and testing API requests with a clean, intuitive interface.",
+    type: "Mac App",
+    github: "https://github.com/relbns/mac-insomnia",
+    download: "https://github.com/relbns/mac-insomnia/releases",
+    technologies: ["macOS", "Swift", "API Testing"]
   },
   {
     id: 2,
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=250&fit=crop", 
-    technologies: ["Vue.js", "Express", "MongoDB", "Socket.io", "TailwindCSS"],
-    github: "https://github.com/username/taskapp",
-    demo: "https://demo-taskapp.com",
-    stars: 89,
-    forks: 15
+    name: "GitHub Cloner",
+    description: "A CLI tool for efficiently cloning and managing multiple GitHub repositories with advanced filtering options.",
+    type: "CLI Tool",
+    github: "https://github.com/relbns/github-cloner",
+    npm: "github-cloner",
+    technologies: ["Node.js", "CLI", "Git", "GitHub API"]
   },
   {
     id: 3,
-    title: "Weather Dashboard",
-    description: "A responsive weather dashboard with location-based forecasts, interactive maps, and weather alerts using modern web APIs.",
-    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=250&fit=crop",
-    technologies: ["JavaScript", "Chart.js", "OpenWeather API", "PWA"],
-    github: "https://github.com/username/weather",
-    demo: "https://demo-weather.com",
-    stars: 67,
-    forks: 12
+    name: "Hebrew Markdown React",
+    description: "A React library for rendering Hebrew markdown content with proper RTL support and typography.",
+    type: "React Library",
+    github: "https://github.com/relbns/hebrew-markdown-react",
+    npm: "hebrew-markdown-react",
+    technologies: ["React", "Markdown", "RTL", "Hebrew"]
   },
   {
     id: 4,
-    title: "Portfolio CMS",
-    description: "A headless CMS built specifically for developers to manage their portfolio content with markdown support and API generation.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop",
-    technologies: ["Next.js", "Prisma", "MySQL", "Markdown", "API Routes"],
-    github: "https://github.com/username/portfolio-cms",
-    demo: "https://demo-cms.com",
-    stars: 156,
-    forks: 34
+    name: "HTTP Utils Kit",
+    description: "A comprehensive utility library for HTTP operations, request handling, and API interactions.",
+    type: "JavaScript Library",
+    github: "https://github.com/relbns/http-utils-kit",
+    npm: "http-utils-kit",
+    technologies: ["JavaScript", "HTTP", "API", "Utilities"]
   }
 ];
+
+const projects = [
+  {
+    id: 1,
+    title: "Otzarot Game",
+    description: "An engaging word puzzle game with Hebrew language support and interactive gameplay mechanics.",
+    github: "https://github.com/relbns/otzarot-game",
+    demo: "", // Add demo URL if available
+    technologies: ["JavaScript", "HTML5", "CSS3", "Game Development"]
+  },
+  {
+    id: 2,
+    title: "P2P Tic Tac Toe",
+    description: "A peer-to-peer multiplayer tic-tac-toe game with real-time synchronization and WebRTC connectivity.",
+    github: "https://github.com/relbns/p2p-tic-tac-toe",
+    demo: "", // Add demo URL if available
+    technologies: ["WebRTC", "JavaScript", "P2P", "Real-time"]
+  },
+  {
+    id: 3,
+    title: "Multiplication Game",
+    description: "An educational math game designed to help students practice multiplication in an interactive way.",
+    github: "https://github.com/relbns/multiplication-game",
+    demo: "", // Add demo URL if available
+    technologies: ["JavaScript", "Education", "Math", "Interactive"]
+  },
+  {
+    id: 4,
+    title: "Paint App",
+    description: "A web-based drawing application with various tools, colors, and canvas manipulation features.",
+    github: "https://github.com/relbns/PaintApp",
+    demo: "", // Add demo URL if available
+    technologies: ["JavaScript", "Canvas API", "Drawing", "Web App"]
+  },
+  {
+    id: 5,
+    title: "Book Manager",
+    description: "A comprehensive book management system for organizing personal libraries and tracking reading progress.",
+    github: "https://github.com/relbns/book-manager",
+    demo: "", // Add demo URL if available
+    technologies: ["JavaScript", "Database", "CRUD", "Library Management"]
+  },
+  {
+    id: 6,
+    title: "Appointment Scheduler",
+    description: "A scheduling application for managing appointments and calendar events with Firebase integration.",
+    github: "", // Private repository
+    demo: "", // Add demo URL if available
+    technologies: ["JavaScript", "Firebase", "Calendar", "Scheduling"],
+    isPrivate: true
+  }
+];
+
+const contributions = [
+  {
+    id: 1,
+    project: "DynamoDB Admin",
+    repository: "aaronshaf/dynamodb-admin",
+    description: "Contributed improvements to the DynamoDB administration interface.",
+    pullRequest: "https://github.com/aaronshaf/dynamodb-admin/pull/248",
+    status: "Merged"
+  },
+  {
+    id: 2,
+    project: "Axios",
+    repository: "axios/axios",
+    description: "Enhanced HTTP client functionality and request handling capabilities.",
+    pullRequest: "https://github.com/axios/axios/pull/5261",
+    status: "Merged"
+  }
+];
+
+function getTypeColor(type: string) {
+  switch (type) {
+    case "Mac App":
+      return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200";
+    case "CLI Tool":
+      return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
+    case "React Library":
+      return "bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200";
+    case "JavaScript Library":
+      return "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200";
+    default:
+      return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200";
+  }
+}
 ---
 
 <Layout title="Portfolio - Projects">
@@ -58,45 +136,109 @@ const projects = [
     <main class="py-20">
       <div class="container max-w-7xl mx-auto px-4">
         <PageHeader 
-          title="My Projects"
-          description="Here are some of my favorite projects that showcase my skills and passion for creating meaningful digital experiences."
+          title="My Work"
+          description="Tools, libraries, and projects I've built to solve real problems and contribute to the developer community."
         />
 
-        <!-- Projects Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <div class="card-professional overflow-hidden group flex flex-col h-full">
-              <!-- Project Image -->
-              <div class="relative overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-
-              <!-- Project Content -->
-              <div class="p-6 flex flex-col h-full">
+        <!-- Tools & Libraries Section -->
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold mb-8 flex items-center">
+            <svg class="h-8 w-8 mr-3 text-primary rtl:mr-0 rtl:ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
+            Tools & Libraries
+          </h2>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            {tools.map((tool) => (
+              <div class="card-professional p-6 hover:shadow-lg transition-shadow">
                 <div class="flex items-start justify-between mb-3">
-                  <h3 class="text-xl font-bold group-hover:text-primary transition-colors">
+                  <h3 class="text-xl font-bold">{tool.name}</h3>
+                  <span class={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${getTypeColor(tool.type)}`}>
+                    {tool.type}
+                  </span>
+                </div>
+
+                <p class="text-muted-foreground mb-4 leading-relaxed">
+                  {tool.description}
+                </p>
+
+                <!-- Technologies -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                  {tool.technologies.map((tech) => (
+                    <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <!-- Installation/Download Info -->
+                {tool.npm && (
+                  <div class="mb-4 p-3 bg-muted rounded-md">
+                    <p class="text-sm text-muted-foreground mb-1">Install via npm:</p>
+                    <code class="text-sm font-mono">npm install {tool.npm}</code>
+                  </div>
+                )}
+
+                {tool.download && !tool.npm && (
+                  <div class="mb-4 p-3 bg-muted rounded-md">
+                    <p class="text-sm text-muted-foreground">Download from releases page</p>
+                  </div>
+                )}
+
+                <!-- Links -->
+                <div class="flex space-x-3 rtl:space-x-reverse">
+                  <a 
+                    href={tool.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+                  >
+                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.30 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    View Code
+                  </a>
+                  {tool.download && (
+                    <a 
+                      href={tool.download} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      class="flex-1 btn-gradient inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 px-3"
+                    >
+                      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      Download
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold mb-8 flex items-center">
+            <svg class="h-8 w-8 mr-3 text-primary rtl:mr-0 rtl:ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            Projects
+          </h2>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {projects.map((project) => (
+              <div class="card-professional p-6 hover:shadow-lg transition-shadow flex flex-col h-full">
+                <div class="flex items-start justify-between mb-3">
+                  <h3 class="text-xl font-bold">
                     {project.title}
                   </h3>
-                  <div class="flex items-center space-x-3 text-sm text-muted-foreground">
-                    <div class="flex items-center space-x-1">
-                      <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2l3.09 6.26L22 9l-5 4.74 1.18 6.26L12 17.77l-6.18 3.23L7 14.74 2 9l6.91-1.74L12 2z"/>
-                      </svg>
-                      <span>{project.stars}</span>
-                    </div>
-                    <div class="flex items-center space-x-1">
-                      <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M6 3h12l4 4v10a4 4 0 01-4 4H6a4 4 0 01-4-4V7a4 4 0 014-4z"/>
-                        <path d="M6 11V9a2 2 0 012-2h8a2 2 0 012 2v2"/>
-                      </svg>
-                      <span>{project.forks}</span>
-                    </div>
-                  </div>
+                  {project.isPrivate && (
+                    <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
+                      Private
+                    </span>
+                  )}
                 </div>
 
                 <p class="text-muted-foreground mb-4 leading-relaxed">
@@ -114,32 +256,97 @@ const projects = [
 
                 <!-- Project Links -->
                 <div class="flex space-x-3 rtl:space-x-reverse mt-auto">
-                  <a 
-                    href={project.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
-                  >
-                    <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    Code
-                  </a>
-                  <a 
-                    href={project.demo} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    class="flex-1 btn-gradient inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 px-3"
-                  >
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                    Live Demo
-                  </a>
+                  {project.github ? (
+                    <>
+                      {project.demo ? (
+                        <>
+                          <a 
+                            href={project.github} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+                          >
+                            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            View Code
+                          </a>
+                          <a 
+                            href={project.demo} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="flex-1 btn-gradient inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-9 px-3"
+                          >
+                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                            Live Demo
+                          </a>
+                        </>
+                      ) : (
+                        <a 
+                          href={project.github} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          class="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+                        >
+                          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                          </svg>
+                          View Code
+                        </a>
+                      )}
+                    </>
+                  ) : (
+                    <div class="w-full text-center text-muted-foreground text-sm py-2">
+                      Private Repository
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        <!-- Open Source Contributions -->
+        <div class="mb-16">
+          <h2 class="text-3xl font-bold mb-8 flex items-center">
+            <svg class="h-8 w-8 mr-3 text-primary rtl:mr-0 rtl:ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4 4m4-4l-4-4m0 8H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+            Open Source Contributions
+          </h2>
+          
+          <div class="grid md:grid-cols-2 gap-6">
+            {contributions.map((contribution) => (
+              <div class="card-professional p-6 hover:shadow-lg transition-shadow">
+                <div class="flex items-center justify-between mb-3">
+                  <h3 class="text-lg font-bold">{contribution.project}</h3>
+                  <span class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                    {contribution.status}
+                  </span>
+                </div>
+
+                <p class="text-sm text-muted-foreground mb-2">{contribution.repository}</p>
+                
+                <p class="text-muted-foreground mb-4 leading-relaxed">
+                  {contribution.description}
+                </p>
+
+                <a 
+                  href={contribution.pullRequest} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
+                >
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  View PR
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
 
         <!-- Call to Action -->
