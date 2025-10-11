@@ -1,7 +1,6 @@
 ---
 import HeroIntroduction from './HeroIntroduction.astro';
 import ProfileImage from './ProfileImage.astro';
-import QuickLinks from './QuickLinks.astro';
 import SocialLinks from './SocialLinks.astro';
 ---
 
@@ -16,9 +15,12 @@ import SocialLinks from './SocialLinks.astro';
     </div>
 
     <!-- Second Row: Quick Links and Contact -->
-    <div class="grid lg:grid-cols-2 gap-8 relative z-10">
-      <QuickLinks />
-      <SocialLinks />
+    <div class="grid place-items-center relative z-10 mt-12">
+      <div class="w-full max-w-3xl">
+        <SocialLinks />
+      </div>
     </div>
+
+
   </div>
 </section>
