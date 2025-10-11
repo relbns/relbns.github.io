@@ -6,7 +6,7 @@ const navigation = [
   { name: "Projects", href: "/projects" },
   { name: "Dev Tools", href: "/devtools" },
   { name: "מדריכים", href: "/tutorials" },
-  { name: "בלוג", href: "/blog" },
+  // { name: "בלוג", href: "/blog" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -23,8 +23,8 @@ function isActiveNavItem(itemHref: string, currentPath: string): boolean {
 <nav class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" dir="ltr">
   <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
-      <!-- Logo -->
-      <div class="flex-shrink-0">
+      <!-- Logo - Mobile Only -->
+      <div class="flex-shrink-0 md:hidden">
         <a 
           href="/" 
           class="text-xl font-bold hero-gradient-text hover:scale-105 transition-transform duration-200"
@@ -156,7 +156,7 @@ function isActiveNavItem(itemHref: string, currentPath: string): boolean {
     { title: "Projects", url: "/projects", content: "portfolio projects web applications software development tools libraries open source contributions" },
     { title: "Dev Tools", url: "/devtools", content: "development tools utilities productivity software" },
     { title: "מדריכים", url: "/tutorials", content: "tutorials learning guides react typescript css security web development hebrew" },
-    { title: "בלוג", url: "/blog", content: "blog posts articles thoughts experiences web development career technology trends hebrew" }
+    // { title: "בלוג", url: "/blog", content: "blog posts articles thoughts experiences web development career technology trends hebrew" }
   ];
 
   function performSearch(query: string): SearchItem[] {
