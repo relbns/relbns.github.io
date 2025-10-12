@@ -27,7 +27,7 @@ const tutorials = defineCollection({
     tags: z.array(z.string()),
     image: z.string(),
     duration: z.string(),
-    views: z.number(),
+    views: z.number().optional(),
     author: z.string().default('Ariel Benesh'),
   }),
 });

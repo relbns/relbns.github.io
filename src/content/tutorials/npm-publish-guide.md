@@ -2,7 +2,7 @@
 title: "מדריך מלא לפרסום ספריות ב־npm עם ניהול גרסאות (SemVer)"
 description: "למדו איך לנהל גרסאות בעזרת Semantic Versioning, ליצור ריליסים בגיטהאב, ולהפיץ ספריות ל־npm בצורה אוטומטית עם GitHub Actions."
 publishDate: "2025-10-03"
-category: "JavaScript"
+category: "פיתוח"
 difficulty: "בינוני"
 tags: ["npm", "GitHub Actions", "SemVer", "Open Source", "Versioning"]
 image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400&h=250&fit=crop"
