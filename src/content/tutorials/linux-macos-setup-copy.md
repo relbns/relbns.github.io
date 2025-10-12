@@ -112,6 +112,8 @@ pbcopy < ~/.ssh/id_ed25519.pub
 העתק את הפלט לאתר
 ➡️ [GitHub SSH Keys → Add new key](https://github.com/settings/keys)
 
+למדריך מפורט של GitHub [לחץ כאן](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
 ---
 
 ### קובץ config (לא חובה אך מומלץ)
