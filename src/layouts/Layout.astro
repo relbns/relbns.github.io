@@ -103,3 +103,72 @@ const shortCommitHash = commitHash.substring(0, 7);
   const isRTL = getRTLPreference();
   document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
 </script>
+
+<script>
+  function addCopyButtons() {
+    const copyIconSvg = `
+      <svg class="copy-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+      </svg>
+    `;
+    const copiedIconSvg = `
+      <svg class="copied-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+    `;
+
+    // Target only Astro/Shiki code blocks
+    document.querySelectorAll('pre.astro-code').forEach(pre => {
+      if (pre.querySelector('.copy-button')) return;
+
+      const button = document.createElement('button');
+      button.className = 'copy-button';
+      button.innerHTML = copyIconSvg + copiedIconSvg;
+      button.setAttribute('aria-label', 'Copy code to clipboard');
+
+      const tooltip = document.createElement('span');
+      tooltip.className = 'copy-tooltip';
+      tooltip.textContent = 'Copied!';
+
+      pre.appendChild(button);
+      pre.appendChild(tooltip);
+
+      button.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.innerText || pre.textContent;
+        if (code) {
+          try {
+            await navigator.clipboard.writeText(code);
+            button.classList.add('copied');
+            tooltip.style.opacity = '1';
+
+            setTimeout(() => {
+              button.classList.remove('copied');
+              tooltip.style.opacity = '0';
+            }, 1500);
+          } catch (err) {
+            console.error('Failed to copy code:', err);
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = code;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            button.classList.add('copied');
+            tooltip.style.opacity = '1';
+            setTimeout(() => {
+              button.classList.remove('copied');
+              tooltip.style.opacity = '0';
+            }, 1500);
+          }
+        }
+      });
+    });
+  }
+
+  // Run on initial load and after Astro page transitions
+  document.addEventListener('astro:after-swap', addCopyButtons);
+  document.addEventListener('DOMContentLoaded', addCopyButtons);
+  addCopyButtons();
+</script>

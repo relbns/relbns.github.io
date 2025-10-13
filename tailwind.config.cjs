@@ -4,6 +4,24 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            pre: {
+              'background-color': theme('colors.gray.50'),
+              color: theme('colors.slate.800'),
+            },
+          },
+        },
+        dark: {
+          css: {
+            pre: {
+              'background-color': theme('colors.slate.800'),
+              color: theme('colors.slate.200'),
+            },
+          },
+        },
+      }),
       colors: {
         border: 'rgb(var(--border) / <alpha-value>)',
         input: 'rgb(var(--input) / <alpha-value>)',

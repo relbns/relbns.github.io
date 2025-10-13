@@ -32,15 +32,16 @@
   padding-left: 0;
 }
 
-/* Code blocks - force LTR direction and fix colors with stronger specificity */
+/* Code blocks - force LTR direction but let Astro code blocks handle styling */
 .prose code {
   direction: ltr !important;
   text-align: left !important;
   unicode-bidi: isolate !important;
-  font-family: 'Courier New', Courier, monospace !important;
+  font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace !important;
 }
 
-.prose pre {
+/* Only style non-Astro pre elements */
+.prose pre:not(.astro-code) {
   direction: ltr !important;
   text-align: left !important;
   unicode-bidi: isolate !important;
@@ -49,7 +50,15 @@
   padding: 1rem !important;
   border-radius: 0.5rem !important;
   overflow-x: auto !important;
-  font-family: 'Courier New', Courier, monospace !important;
+  font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', monospace !important;
+}
+
+/* Let Astro code blocks handle their own styling */
+.prose pre.astro-code {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate !important;
+  /* Remove all other styling to let globals.css handle it */
 }
 
 .prose pre code {
